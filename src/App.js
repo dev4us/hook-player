@@ -1,12 +1,11 @@
 import React from "react";
-import initLocalPlayList from "./handleLocalStorage/initLocalPlayList";
-import handlePlayList
-
+// import handleStatePlayList from "./handleStatePlayList";
+import InputForm from "./InputForm";
+ 
 function App() {
-  const localPlayList = initLocalPlayList();
+  //const {  statePlayList } = handleStatePlayList();
 
-  console.log(playList, setPlayList);
-  return <div className="App">hey</div>;
+return (<div className="App"><InputForm/></div>);
 }
 
 export default App;
