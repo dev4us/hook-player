@@ -2,6 +2,7 @@ import { createGlobalStyle } from "styled-components";
 import reset from "styled-reset";
 
 const GlobalStyle = createGlobalStyle`
+  @import url('https://fonts.googleapis.com/css?family=PT+Sans:400,700');
  ${reset}
   * {
     box-sizing: border-box;
@@ -10,7 +11,8 @@ const GlobalStyle = createGlobalStyle`
     outline:none;
   }
   body{
-    font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    font-family: 'PT Sans', sans-serif, -apple-system,system-ui,BlinkMacSystemFont;
+    font-weight:400;
   }
   a{
     color:inherit;

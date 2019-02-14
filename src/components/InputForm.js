@@ -30,7 +30,8 @@ const InputForm = ({ statePlayList, addStatePlayList }) => {
           songName: res.data.items[0].snippet.title,
           singer: res.data.items[0].snippet.channelTitle,
           videoKey: res.data.items[0].id,
-          thumbnail: res.data.items[0].snippet.thumbnails.high.url
+          thumbnail: res.data.items[0].snippet.thumbnails.high.url,
+          max_thumbnail: res.data.items[0].snippet.thumbnails.maxres.url
         }
       ];
       addStatePlayList(returnData);

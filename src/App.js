@@ -9,30 +9,36 @@ import handlePlayer from "./handleState/handlePlayer";
 import InputForm from "./components/InputForm";
 import AlbumList from "./components/AlbumList";
 import Player from "./components/Player";
-// import Background from "./components/Background";
-
-const Background = styled.div`
-  position: relative;
-  width: 100vw;
-  height: 100vh;
-  top: 0;
-  left: 0;
-
-  background-image: url(${props => props.backgroundURL});
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-
-  filter: blur(8px);
-  -webkit-filter: blur(8px);
-  z-index: 1;
-`;
+import Background from "./components/Background";
+import DetailPlaying from "./components/DetailPlaying";
 
 const MainFrame = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: absolute;
+  width: 100%;
+  height: 100%;
+
   top: 0;
   left: 0;
   z-index: 2;
+`;
+
+const BodyFrame = styled.div`
+  display: flex;
+  height: 80%;
+  width: 70%;
+`;
+
+const DetailPlayFrame = styled.div`
+  flex: 1;
+  height: 100%;
+`;
+const ControllerPlayFrame = styled.div`
+  flex: 1;
+  height: 100%;
+  border: 1px solid blue;
 `;
 
 function App() {
@@ -42,16 +48,23 @@ function App() {
     <div className="App">
       <Background backgroundURL={nowPlaying.thumbnail} />
       <MainFrame>
-        <InputForm
-          statePlayList={statePlayList}
-          addStatePlayList={addStatePlayList}
-        />
-        <br />
-        <Player nowPlaying={nowPlaying} />
-        <AlbumList
-          statePlayList={statePlayList}
-          setNowPlaying={setNowPlaying}
-        />
+        <BodyFrame>
+          <DetailPlayFrame>
+            <DetailPlaying nowPlaying={nowPlaying} />
+          </DetailPlayFrame>
+          <ControllerPlayFrame>
+            <InputForm
+              statePlayList={statePlayList}
+              addStatePlayList={addStatePlayList}
+            />
+            <br />
+            <Player nowPlaying={nowPlaying} />
+            <AlbumList
+              statePlayList={statePlayList}
+              setNowPlaying={setNowPlaying}
+            />
+          </ControllerPlayFrame>
+        </BodyFrame>
       </MainFrame>
     </div>
   );
