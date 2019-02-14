@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
 const handleStatePlayList = () => {
-  const initialPlayList = 
+  const initialPlayList = [
     {
       id: 0,
       songName: "YoungBlood",
@@ -9,27 +9,25 @@ const handleStatePlayList = () => {
       videoKey: "CXNv4_wQjKQ",
       thumbnail: "https://i.ytimg.com/vi/CXNv4_wQjKQ/mqdefault.jpg"
     }
-  ;
-  
-  const getPlayList =
-    localStorage.getItem('localPlayList') ?
-    JSON.parse(localStorage.getItem('localPlayList')) : initialPlayList;
-  
-  const [statePlayList, setStatePlayList] = useState([getPlayList]);
+  ];
+
+  const getPlayList = localStorage.getItem("localPlayList")
+    ? JSON.parse(localStorage.getItem("localPlayList"))
+    : initialPlayList;
+
+  const [statePlayList, setStatePlayList] = useState(getPlayList);
 
   useEffect(() => {
-    localStorage.setItem('localPlayList', JSON.stringify(statePlayList));
+    localStorage.setItem("localPlayList", JSON.stringify(statePlayList));
     console.log(statePlayList);
-    },
-    [statePlayList]
-  )
+  });
 
   return {
     statePlayList,
     addStatePlayList: contentsData => {
-      const beforeStateList = statePlayList;
-      const nextStateList = beforeStateList.concat(contentsData);
-      setStatePlayList([{...nextStateList}]);
+      let beforeStateList = statePlayList;
+      let nextStateList = beforeStateList.concat(contentsData);
+      setStatePlayList(nextStateList);
     },
     deleteStatePlayList: conetentsId => {
       const afterStatePlayList = statePlayList.filter(
