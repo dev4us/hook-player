@@ -1,7 +1,7 @@
 import React from "react";
 import Album from "./Album";
 
-const AlbumList = ({ statePlayList, setMovieUrl }) => {
+const AlbumList = ({ statePlayList, setNowPlaying }) => {
   return (
     <>
       {statePlayList.map((data, index) => (
@@ -9,7 +9,8 @@ const AlbumList = ({ statePlayList, setMovieUrl }) => {
           key={index.toString()}
           thumbnail={data.thumbnail}
           movieId={data.videoKey}
-          setMovieUrl={setMovieUrl}
+          setNowPlaying={setNowPlaying}
+          statePlayList={statePlayList}
         />
       ))}
     </>

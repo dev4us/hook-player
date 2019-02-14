@@ -1,11 +1,11 @@
 import { useState } from "react";
 
-const handlePlayer = initialVideoKey => {
-  const [movieUrl, setMovieUrl] = useState(initialVideoKey);
+const handlePlayer = initial => {
+  const [nowPlaying, setNowPlaying] = useState(initial);
 
   return {
-    movieUrl,
-    setMovieUrl
+    nowPlaying,
+    setNowPlaying
   };
 };
 

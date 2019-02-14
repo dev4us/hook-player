@@ -1,10 +1,10 @@
 import React from "react";
 import YouTube from "react-yt";
 
-const Player = ({ movieUrl }) => {
+const Player = ({ nowPlaying }) => {
   return (
     <>
-      <YouTube videoId={movieUrl} autoplay={true} />
+      <YouTube videoId={nowPlaying.videoKey} autoplay={false} />
     </>
   );
 };
