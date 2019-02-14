@@ -22,7 +22,7 @@ const InputForm = ({ statePlayList, addStatePlayList }) => {
     const API_KEY = "AIzaSyCC2pMVczqa5crA9qxUFnceNC_0p2gV7gg";
     const API_URL = `https://www.googleapis.com/youtube/v3/videos?id=${video_id}&key=${API_KEY}&part=snippet,contentDetails,statistics,status`;
     const res = await axios.get(API_URL);
-
+    console.log(res);
     if (res.status === 200 && res.data.items.length >= 1) {
       const returnData = [
         {

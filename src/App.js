@@ -1,9 +1,13 @@
 import React from "react";
-import handleStatePlayList from "./handleStatePlayList";
-import InputForm from "./InputForm";
-import AlbumList from "./AlbumList";
-import handlePlayer from "./handlePlayer";
-import Player from "./Player";
+
+// For handle State
+import handleStatePlayList from "./handleState/handleStatePlayList";
+import handlePlayer from "./handleState/handlePlayer";
+
+// Components
+import InputForm from "./components/InputForm";
+import AlbumList from "./components/AlbumList";
+import Player from "./components/Player";
 
 function App() {
   const { statePlayList, addStatePlayList } = handleStatePlayList();
