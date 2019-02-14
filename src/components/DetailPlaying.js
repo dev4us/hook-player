@@ -11,7 +11,7 @@ const Container = styled.div`
 
 const PlayingThumbnail = styled.img`
   width: 85%;
-  height: 75%;
+  height: 70%;
   -webkit-box-shadow: 0 15px 14px rgba(0, 0, 0, 0.5),
     0 25px 25px rgba(0, 0, 0, 0.075);
   box-shadow: 0 15px 14px rgba(0, 0, 0, 0.5), 0 25px 25px rgba(0, 0, 0, 0.075);

@@ -10,7 +10,6 @@ import InputForm from "./components/InputForm";
 import AlbumList from "./components/AlbumList";
 import Player from "./components/Player";
 import Background from "./components/Background";
-import DetailPlaying from "./components/DetailPlaying";
 
 const MainFrame = styled.div`
   display: flex;
@@ -50,7 +49,7 @@ function App() {
       <MainFrame>
         <BodyFrame>
           <DetailPlayFrame>
-            <DetailPlaying nowPlaying={nowPlaying} />
+            <Player nowPlaying={nowPlaying} />
           </DetailPlayFrame>
           <ControllerPlayFrame>
             <InputForm
@@ -58,7 +57,6 @@ function App() {
               addStatePlayList={addStatePlayList}
             />
             <br />
-            <Player nowPlaying={nowPlaying} />
             <AlbumList
               statePlayList={statePlayList}
               setNowPlaying={setNowPlaying}
