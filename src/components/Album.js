@@ -15,7 +15,7 @@ const AlbumItem = styled.div`
   ${props =>
     props.isPlaying &&
     css`
-      background: rgba(255, 255, 255, 0.4);
+      background: rgba(228, 43, 43, 0.4);
     `};
 
   &:hover {

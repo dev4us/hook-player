@@ -4,8 +4,18 @@ import YouTube from "react-yt";
 import styled from "styled-components";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlayCircle, faPauseCircle } from "@fortawesome/free-solid-svg-icons";
+import {
+  faPlayCircle,
+  faPauseCircle,
+  faChevronCircleLeft,
+  faChevronCircleRight
+} from "@fortawesome/free-solid-svg-icons";
 
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
 const LeftFrame = styled.div`
   width: 100%;
   height: 100%;
@@ -17,7 +27,11 @@ const PlayerHiddenFrame = styled.div`
   height: 1px;
   overflow: hidden;
 `;
-
+const Controller = styled.div`
+  width: 500px;
+  height: 150px;
+  border: 1px solid white;
+`;
 const PlayBtn = styled(FontAwesomeIcon)`
   cursor: pointer;
   font-size: 3rem;
@@ -41,9 +55,11 @@ const Player = ({ nowPlaying }) => {
             const isPlaying = getPlayerState() === 1;
 
             return (
-              <>
+              <Container>
                 <PlayerHiddenFrame>{iframe}</PlayerHiddenFrame>
                 <DetailPlaying nowPlaying={nowPlaying} />
+                <Controller />
+                <PauseBtn icon={faChevronCircleLeft} />
                 {isPlaying ? (
                   <PauseBtn
                     icon={faPauseCircle}
@@ -52,7 +68,8 @@ const Player = ({ nowPlaying }) => {
                 ) : (
                   <PlayBtn icon={faPlayCircle} onClick={event => playVideo()} />
                 )}
-              </>
+                <PauseBtn icon={faChevronCircleRight} />
+              </Container>
             );
           }}
         />

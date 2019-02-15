@@ -3,10 +3,10 @@ import styled from "styled-components";
 
 const Container = styled.div`
   display: flex;
+  flex: 1;
   align-items: center;
   flex-direction: column;
   width: 100%;
-  height: 100%;
 `;
 
 const PlayingThumbnail = styled.img`
@@ -32,10 +32,18 @@ const SingerTitle = styled.p`
 
 const DetailPlaying = ({ nowPlaying }) => {
   const { max_thumbnail, songName, singer } = nowPlaying;
+  let afterSongName = songName;
+
+  const getSongName = () => {
+    if (afterSongName.length > 30) {
+      afterSongName = afterSongName.substring(0, 30) + "...";
+    }
+    return afterSongName;
+  };
   return (
     <Container>
       <PlayingThumbnail src={max_thumbnail} alt="DetailPlayingThumbnail" />
-      <SongTitle>{songName}</SongTitle>
+      <SongTitle>{getSongName()}</SongTitle>
       <SingerTitle>{singer}</SingerTitle>
     </Container>
   );
