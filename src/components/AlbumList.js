@@ -8,7 +8,12 @@ const AlbumContainer = styled.div`
   overflow-y: scroll;
 `;
 
-const AlbumList = ({ statePlayList, nowPlaying, setNowPlaying }) => {
+const AlbumList = ({
+  statePlayList,
+  nowPlaying,
+  setNowPlaying,
+  deleteStatePlayList
+}) => {
   return (
     <AlbumContainer>
       {statePlayList.map((data, index) => (
@@ -16,9 +21,13 @@ const AlbumList = ({ statePlayList, nowPlaying, setNowPlaying }) => {
           key={index.toString()}
           thumbnail={data.thumbnail}
           movieId={data.videoKey}
+          songName={data.songName}
+          singer={data.singer}
+          duration={data.duration}
           nowPlaying={nowPlaying}
           setNowPlaying={setNowPlaying}
           statePlayList={statePlayList}
+          deleteStatePlayList={deleteStatePlayList}
         />
       ))}
     </AlbumContainer>

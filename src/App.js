@@ -56,7 +56,11 @@ const ControllerTitle = styled.div`
 `;
 
 function App() {
-  const { statePlayList, addStatePlayList } = handleStatePlayList();
+  const {
+    statePlayList,
+    addStatePlayList,
+    deleteStatePlayList
+  } = handleStatePlayList();
   const { nowPlaying, setNowPlaying } = handlePlayer(statePlayList[0]);
   return (
     <div className="App">
@@ -98,6 +102,7 @@ function App() {
               statePlayList={statePlayList}
               nowPlaying={nowPlaying}
               setNowPlaying={setNowPlaying}
+              deleteStatePlayList={deleteStatePlayList}
             />
           </ControllerPlayFrame>
         </BodyFrame>

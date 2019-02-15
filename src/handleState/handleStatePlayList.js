@@ -31,9 +31,9 @@ const handleStatePlayList = () => {
       let nextStateList = beforeStateList.concat(contentsData);
       setStatePlayList(nextStateList);
     },
-    deleteStatePlayList: conetentsId => {
+    deleteStatePlayList: conetentsKey => {
       const afterStatePlayList = statePlayList.filter(
-        (_, index) => index !== conetentsId
+        (val, index) => val.videoKey !== conetentsKey
       );
       setStatePlayList(afterStatePlayList);
     }

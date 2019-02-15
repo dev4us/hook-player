@@ -69,7 +69,7 @@ const InputForm = ({ statePlayList, addStatePlayList }) => {
 
   const getMovieData = async () => {
     if (!inputUrl) {
-      alert("hey!");
+      alert("URL 이나 VideoId를 입력해주세요.");
       return false;
     }
 
@@ -90,7 +90,8 @@ const InputForm = ({ statePlayList, addStatePlayList }) => {
     const API_KEY = "AIzaSyCC2pMVczqa5crA9qxUFnceNC_0p2gV7gg";
     const API_URL = `https://www.googleapis.com/youtube/v3/videos?id=${video_id}&key=${API_KEY}&part=snippet,contentDetails,statistics,status`;
     const res = await axios.get(API_URL);
-    console.log(res);
+    setUrl("");
+
     if (res.status === 200 && res.data.items.length >= 1) {
       const highestThumbnail = () => {
         let returnData = "";
@@ -115,9 +116,15 @@ const InputForm = ({ statePlayList, addStatePlayList }) => {
           duration: ytDurationFormat(res.data.items[0].contentDetails.duration)
         }
       ];
+
+      if (statePlayList.find(val => val.videoKey === res.data.items[0].id)) {
+        alert("이미 등록된 음원입니다");
+        return false;
+      }
+
       addStatePlayList(returnData);
     } else {
-      alert("존재하지 않는 주소입니다");
+      alert("존재하지 않거나 적절하지 않은 주소입니다.");
     }
   };
 
