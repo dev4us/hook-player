@@ -1,11 +1,78 @@
 import React, { useState } from "react";
+import styled, { keyframes } from "styled-components";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 
+const Container = styled.div`
+  display: flex;
+  align-items: baseline;
+  width: 100%;
+  height: 5%;
+  margin-top: 3%;
+`;
+
+const Subscription = styled.span`
+  width: 15%;
+  margin-left: 2%;
+  margin-right: 2%;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #ececec;
+`;
+
+const SearchBtnHover = keyframes`
+  100%{
+    background:rgba(255, 255, 255, 0.5);
+    box-shadow:none;
+  }
+`;
+
+const SearchBtnFrame = styled.span`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  width: 10%;
+  height: 40px;
+  border: 2px solid white;
+  border-radius: 10px;
+
+  -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12),
+    0 3px 6px rgba(0, 0, 0, 0.1725);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12), 0 3px 6px rgba(0, 0, 0, 0.1725);
+
+  &:hover {
+    animation: ${SearchBtnHover} 0.1s ease;
+    animation-fill-mode: forwards;
+  }
+`;
+
+const SearchBtn = styled(FontAwesomeIcon)`
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: #dcdcdc;
+`;
+
+const SearchInput = styled.input`
+  background: none;
+  width: 70%;
+  height: 100%;
+  color: #ececec;
+  border: none;
+  border-bottom: 2px solid #ececec;
+`;
+
 const InputForm = ({ statePlayList, addStatePlayList }) => {
-  const [url, setUrl] = useState("");
+  const [inputUrl, setUrl] = useState("");
 
   const getMovieData = async () => {
-    const fullUrl = url;
+    if (!inputUrl) {
+      alert("hey!");
+      return false;
+    }
+
+    const fullUrl = inputUrl;
     let video_id = "";
 
     if (fullUrl.includes("v=") === false) {
@@ -24,14 +91,29 @@ const InputForm = ({ statePlayList, addStatePlayList }) => {
     const res = await axios.get(API_URL);
     console.log(res);
     if (res.status === 200 && res.data.items.length >= 1) {
+      /*const duration = ({ duration }) => {
+        durations.substring(0);
+      };*/
+      const highestThumbnail = () => {
+        let returnData = "";
+
+        if (res.data.items[0].snippet.thumbnails.maxres) {
+          returnData = res.data.items[0].snippet.thumbnails.maxres.url;
+        } else if (res.data.items[0].snippet.thumbnails.high) {
+          returnData = res.data.items[0].snippet.thumbnails.high.url;
+        } else if (res.data.items[0].snippet.thumbnails.medium) {
+          returnData = res.data.items[0].snippet.thumbnails.medium.url;
+        }
+        return returnData;
+      };
       const returnData = [
         {
           id: statePlayList.length || 0,
           songName: res.data.items[0].snippet.title,
           singer: res.data.items[0].snippet.channelTitle,
           videoKey: res.data.items[0].id,
-          thumbnail: res.data.items[0].snippet.thumbnails.high.url,
-          max_thumbnail: res.data.items[0].snippet.thumbnails.maxres.url
+          thumbnail: highestThumbnail(),
+          max_thumbnail: highestThumbnail()
         }
       ];
       addStatePlayList(returnData);
@@ -41,10 +123,17 @@ const InputForm = ({ statePlayList, addStatePlayList }) => {
   };
 
   return (
-    <>
-      <input type="text" value={url} onChange={e => setUrl(e.target.value)} />
-      <button onClick={() => getMovieData()}>add this url</button>
-    </>
+    <Container>
+      <Subscription>Youtube Link:</Subscription>
+      <SearchInput
+        value={inputUrl}
+        onChange={e => setUrl(e.target.value)}
+        placeholder={`Insert Youtube URL or videoId`}
+      />
+      <SearchBtnFrame onClick={() => getMovieData()}>
+        <SearchBtn icon={faPlus} />
+      </SearchBtnFrame>
+    </Container>
   );
 };
 

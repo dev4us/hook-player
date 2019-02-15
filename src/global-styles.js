@@ -4,11 +4,19 @@ import reset from "styled-reset";
 const GlobalStyle = createGlobalStyle`
   @import url('https://fonts.googleapis.com/css?family=PT+Sans:400,700');
  ${reset}
+ .App, .root{
+   width:100%;
+   height:100%;
+ }
   * {
     box-sizing: border-box;
   }
   *:focus{
     outline:none;
+  }
+  html,body{
+    width:100%;
+    height:100%;
   }
   body{
     font-family: 'PT Sans', sans-serif, -apple-system,system-ui,BlinkMacSystemFont;

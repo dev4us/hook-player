@@ -6,9 +6,9 @@ const handleStatePlayList = () => {
       id: 0,
       songName: "YoungBlood",
       singer: "5 Seconds of Summer",
-      videoKey: "CXNv4_wQjKQ",
-      thumbnail: "https://i.ytimg.com/vi/CXNv4_wQjKQ/mqdefault.jpg",
-      max_thumbnail: "https://i.ytimg.com/vi/CXNv4_wQjKQ/maxresdefault.jpg"
+      videoKey: "nK_OAW47Brw",
+      thumbnail: "https://i.ytimg.com/vi/nK_OAW47Brw/maxresdefault.jpg",
+      max_thumbnail: "https://i.ytimg.com/vi/nK_OAW47Brw/maxresdefault.jpg"
     }
   ];
 
