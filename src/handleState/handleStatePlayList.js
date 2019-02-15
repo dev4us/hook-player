@@ -8,7 +8,8 @@ const handleStatePlayList = () => {
       singer: "5 Seconds of Summer",
       videoKey: "nK_OAW47Brw",
       thumbnail: "https://i.ytimg.com/vi/nK_OAW47Brw/maxresdefault.jpg",
-      max_thumbnail: "https://i.ytimg.com/vi/nK_OAW47Brw/maxresdefault.jpg"
+      max_thumbnail: "https://i.ytimg.com/vi/nK_OAW47Brw/maxresdefault.jpg",
+      duration: "03:25"
     }
   ];
 

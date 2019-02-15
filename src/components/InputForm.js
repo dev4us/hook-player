@@ -3,6 +3,7 @@ import styled, { keyframes } from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
+import ytDurationFormat from "youtube-duration-format";
 
 const Container = styled.div`
   display: flex;
@@ -91,9 +92,6 @@ const InputForm = ({ statePlayList, addStatePlayList }) => {
     const res = await axios.get(API_URL);
     console.log(res);
     if (res.status === 200 && res.data.items.length >= 1) {
-      /*const duration = ({ duration }) => {
-        durations.substring(0);
-      };*/
       const highestThumbnail = () => {
         let returnData = "";
 
@@ -113,7 +111,8 @@ const InputForm = ({ statePlayList, addStatePlayList }) => {
           singer: res.data.items[0].snippet.channelTitle,
           videoKey: res.data.items[0].id,
           thumbnail: highestThumbnail(),
-          max_thumbnail: highestThumbnail()
+          max_thumbnail: highestThumbnail(),
+          duration: ytDurationFormat(res.data.items[0].contentDetails.duration)
         }
       ];
       addStatePlayList(returnData);
