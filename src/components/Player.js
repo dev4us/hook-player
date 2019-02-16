@@ -9,7 +9,9 @@ import {
   faPlayCircle,
   faPauseCircle,
   faChevronCircleLeft,
-  faChevronCircleRight
+  faChevronCircleRight,
+  faVolumeMute,
+  faVolumeUp
 } from "@fortawesome/free-solid-svg-icons";
 
 const Container = styled.div`
@@ -70,10 +72,36 @@ const DurationBar = styled.input`
   }
 `;
 
+const VolumeBar = styled.input`
+  -webkit-appearance: none;
+  width: 40%;
+  height: 10px;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.5);
+  outline: none;
+  cursor: pointer;
+
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 5px;
+    height: 20px;
+    background: white;
+    cursor: pointer;
+  }
+  &::-moz-range-thumb {
+    width: 5px;
+    height: 20px;
+    background: white;
+    cursor: pointer;
+  }
+`;
+
 const RemotePlayer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+  width: 100%;
 `;
 const PlayPauseBtn = styled(FontAwesomeIcon)`
   cursor: pointer;
@@ -89,13 +117,32 @@ const ArrowBtn = styled(FontAwesomeIcon)`
   color: white;
 `;
 
+const VolumnIcon = styled(FontAwesomeIcon)`
+  font-size: 1rem;
+  color: white;
+  cursor: pointer;
+`;
+
+const SongController = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex: 6.25;
+`;
+const VolumeController = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex: 3.75;
+`;
+
 const Player = ({ nowPlaying, statePlayList, setNowPlaying }) => {
   return (
     <>
       <LeftFrame>
         <YouTube
           videoId={nowPlaying.videoKey}
-          autoplay={false}
+          autoplay={true}
           render={({
             iframe,
             getPlayerState,
@@ -103,9 +150,19 @@ const Player = ({ nowPlaying, statePlayList, setNowPlaying }) => {
             getDuration,
             playVideo,
             pauseVideo,
-            seekTo
+            seekTo,
+            getVolume,
+            setVolume,
+            isMuted,
+            mute,
+            unMute
           }) => {
             const isPlaying = getPlayerState() === 1;
+            const currentTime = getCurrentTime();
+            const duration = getDuration();
+            const nowIndex = statePlayList.findIndex(
+              val => val.videoKey === nowPlaying.videoKey
+            );
             const formatTime = time => {
               if (time === 0) {
                 return "0:00";
@@ -122,30 +179,34 @@ const Player = ({ nowPlaying, statePlayList, setNowPlaying }) => {
               ) {
                 return 0;
               }
+
+              if (current === duration && duration !== 0) {
+                let nextIndex = Math.floor(
+                  Math.random() * statePlayList.length
+                );
+
+                setNowPlaying(statePlayList[nextIndex]);
+              }
+
               return Math.ceil((current / duration) * 100);
             };
+
             const moveCurrent = (value, duration) => {
               if (typeof value !== undefined && typeof duration !== undefined) {
                 playVideo();
                 seekTo(Math.ceil((value / 100) * duration));
               }
             };
-            const prevPlay = () => {
+            const prevPlay = nowIndex => {
               // turn nextMusic
-              const nowIndex = statePlayList.findIndex(
-                val => val.videoKey === nowPlaying.videoKey
-              );
               if (0 === nowIndex) {
                 toast.error("이전 항목이 없습니다.");
               } else {
                 setNowPlaying(statePlayList[nowIndex - 1]);
               }
             };
-            const nextPlay = () => {
+            const nextPlay = nowIndex => {
               // turn nextMusic
-              const nowIndex = statePlayList.findIndex(
-                val => val.videoKey === nowPlaying.videoKey
-              );
               if (statePlayList.length - 1 === nowIndex) {
                 toast.error("다음 항목이 없습니다.");
               } else {
@@ -159,40 +220,63 @@ const Player = ({ nowPlaying, statePlayList, setNowPlaying }) => {
                 <DetailPlaying nowPlaying={nowPlaying} />
                 <Controller>
                   <DurationStatus>
-                    {formatTime(getCurrentTime())} / {formatTime(getDuration())}
+                    {formatTime(currentTime)} / {formatTime(duration)}
                     <DurationBar
                       type="range"
                       min={0}
                       max={100}
-                      value={getProcessPer(getCurrentTime(), getDuration())}
-                      onChange={e => moveCurrent(e.target.value, getDuration())}
+                      value={getProcessPer(currentTime, duration)}
+                      onChange={e => moveCurrent(e.target.value, duration)}
                     />
                   </DurationStatus>
 
                   <RemotePlayer>
-                    <ArrowBtn
-                      icon={faChevronCircleLeft}
-                      onClick={() => {
-                        prevPlay();
-                      }}
-                    />
-                    {isPlaying ? (
-                      <PlayPauseBtn
-                        icon={faPauseCircle}
-                        onClick={event => pauseVideo()}
+                    <SongController>
+                      <ArrowBtn
+                        icon={faChevronCircleLeft}
+                        onClick={() => {
+                          prevPlay(nowIndex);
+                        }}
                       />
-                    ) : (
-                      <PlayPauseBtn
-                        icon={faPlayCircle}
-                        onClick={event => playVideo()}
+                      {isPlaying ? (
+                        <PlayPauseBtn
+                          icon={faPauseCircle}
+                          onClick={event => pauseVideo()}
+                        />
+                      ) : (
+                        <PlayPauseBtn
+                          icon={faPlayCircle}
+                          onClick={event => playVideo()}
+                        />
+                      )}
+                      <ArrowBtn
+                        icon={faChevronCircleRight}
+                        onClick={() => {
+                          nextPlay(nowIndex);
+                        }}
                       />
-                    )}
-                    <ArrowBtn
-                      icon={faChevronCircleRight}
-                      onClick={() => {
-                        nextPlay();
-                      }}
-                    />
+                    </SongController>
+                    <VolumeController>
+                      {isMuted() && (
+                        <VolumnIcon
+                          icon={faVolumeUp}
+                          onClick={() => unMute()}
+                        />
+                      )}
+                      {!isMuted() && (
+                        <VolumnIcon
+                          icon={faVolumeMute}
+                          onClick={() => mute()}
+                        />
+                      )}
+                      <VolumeBar
+                        type="range"
+                        min={0}
+                        max={100}
+                        value={getVolume()}
+                        onChange={e => setVolume(e.target.value)}
+                      />
+                    </VolumeController>
                   </RemotePlayer>
                 </Controller>
               </Container>

@@ -4,12 +4,13 @@ const handleStatePlayList = () => {
   const initialPlayList = [
     {
       id: 0,
-      songName: "YoungBlood",
-      singer: "5 Seconds of Summer",
-      videoKey: "nK_OAW47Brw",
-      thumbnail: "https://i.ytimg.com/vi/nK_OAW47Brw/maxresdefault.jpg",
-      max_thumbnail: "https://i.ytimg.com/vi/nK_OAW47Brw/maxresdefault.jpg",
-      duration: "03:25"
+      songName:
+        "We Can't Stop - Miley Cyrus (Boyce Avenue feat. Bea Miller cover) on Spotify & Apple",
+      singer: "Boyce Avenue",
+      videoKey: "uzgp65UnPxA",
+      thumbnail: "https://i.ytimg.com/vi/uzgp65UnPxA/maxresdefault.jpg",
+      max_thumbnail: "https://i.ytimg.com/vi/uzgp65UnPxA/maxresdefault.jpg",
+      duration: "04:30"
     }
   ];
 
@@ -32,10 +33,15 @@ const handleStatePlayList = () => {
       setStatePlayList(nextStateList);
     },
     deleteStatePlayList: conetentsKey => {
-      const afterStatePlayList = statePlayList.filter(
-        (val, index) => val.videoKey !== conetentsKey
-      );
-      setStatePlayList(afterStatePlayList);
+      if (statePlayList.length !== 1) {
+        const afterStatePlayList = statePlayList.filter(
+          (val, index) => val.videoKey !== conetentsKey
+        );
+        setStatePlayList(afterStatePlayList);
+        return true;
+      } else {
+        return false;
+      }
     }
   };
 };

@@ -10,6 +10,7 @@ import InputForm from "./components/InputForm";
 import AlbumList from "./components/AlbumList";
 import Player from "./components/Player";
 import Background from "./components/Background";
+import GHCorner from "react-gh-corner";
 
 const MainFrame = styled.div`
   display: flex;
@@ -69,6 +70,11 @@ function App() {
   return (
     <div className="App">
       <Background backgroundURL={nowPlaying.thumbnail} />
+      <GHCorner
+        href="https://github.com/dev4us/hook-player"
+        size={100}
+        bgColor="#9f4940"
+      />
       <MainFrame>
         <BodyFrame>
           <DetailPlayFrame>

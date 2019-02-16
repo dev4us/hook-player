@@ -2,6 +2,7 @@ import React from "react";
 import styled, { keyframes, css } from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { toast } from "react-toastify";
 
 const AlbumItem = styled.div`
   display: flex;
@@ -137,7 +138,9 @@ const Album = ({
             icon={faTrash}
             onClick={e => {
               e.stopPropagation();
-              deleteStatePlayList(movieId);
+              if (deleteStatePlayList(movieId) !== true) {
+                toast.error("하나의 항목은 유지하여야 합니다.");
+              }
             }}
           />
         </SubIcon>
