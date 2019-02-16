@@ -52,6 +52,27 @@ const AlbumThumbnail = styled.div`
       animation: ${rotate} 5s linear infinite;
     `};
 `;
+const SubContainer = styled.div`
+  display: block;
+  float: right;
+  width: 80%;
+  height: 100%;
+`;
+
+const SubText = styled.div`
+  display: flex;
+  align-items: center;
+  float: left;
+  width: 80%;
+  height: 100%;
+`;
+const SubIcon = styled.div`
+  display: flex;
+  align-items: center;
+  float: right;
+  width: 20%;
+  height: 100%;
+`;
 const SubSongName = styled.a`
   color: white;
   font-size: 15px;
@@ -66,8 +87,8 @@ const SubDuration = styled.a`
 
 const DeleteBtn = styled(FontAwesomeIcon)`
   position: absolute;
-  right: 30px;
-  font-size: 1.5rem;
+  right: 1rem;
+  font-size: 1.2rem;
   cursor: pointer;
   color: #8c8c8c;
   &:hover {
@@ -88,10 +109,14 @@ const Album = ({
 }) => {
   const isPlaying = movieId === nowPlaying.videoKey;
   const getFullName = () => {
-    if (songName.length > 30) {
-      songName = songName.substring(0, 30) + "...";
+    if (songName !== "" && songName !== undefined) {
+      if (songName.length > 30) {
+        songName = songName.substring(0, 30) + "...";
+      }
+      return songName + " - " + singer;
+    } else {
+      return null;
     }
-    return songName + " - " + singer;
   };
 
   return (
@@ -102,15 +127,21 @@ const Album = ({
       isPlaying={isPlaying}
     >
       <AlbumThumbnail background={thumbnail} isPlaying={isPlaying} />
-      <SubSongName>{getFullName()}</SubSongName>
-      <SubDuration>{`(${duration})`}</SubDuration>
-      <DeleteBtn
-        icon={faTrash}
-        onClick={e => {
-          e.stopPropagation();
-          deleteStatePlayList(movieId);
-        }}
-      />
+      <SubContainer>
+        <SubText>
+          <SubSongName>{getFullName()}</SubSongName>
+          <SubDuration>{`(${duration})`}</SubDuration>
+        </SubText>
+        <SubIcon>
+          <DeleteBtn
+            icon={faTrash}
+            onClick={e => {
+              e.stopPropagation();
+              deleteStatePlayList(movieId);
+            }}
+          />
+        </SubIcon>
+      </SubContainer>
     </AlbumItem>
   );
 };

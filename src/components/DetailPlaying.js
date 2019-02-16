@@ -32,13 +32,17 @@ const SingerTitle = styled.p`
 
 const DetailPlaying = ({ nowPlaying }) => {
   const { max_thumbnail, songName, singer } = nowPlaying;
-  let afterSongName = songName;
+  let afterSongName = "";
 
   const getSongName = () => {
-    if (afterSongName.length > 30) {
-      afterSongName = afterSongName.substring(0, 30) + "...";
+    if (songName !== "" && songName !== undefined) {
+      if (songName.length > 30) {
+        afterSongName = songName.substring(0, 30) + "...";
+      }
+      return afterSongName;
+    } else {
+      return null;
     }
-    return afterSongName;
   };
   return (
     <Container>

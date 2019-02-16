@@ -37,6 +37,9 @@ const DetailPlayFrame = styled.div`
   /*flex: 1;*/
   width: 700px;
   height: 100%;
+  @media (max-width: 985px) {
+    height: 66%;
+  }
 `;
 const ControllerPlayFrame = styled.div`
   display: flex;
