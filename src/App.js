@@ -65,13 +65,18 @@ function App() {
     deleteStatePlayList
   } = handleStatePlayList();
   const { nowPlaying, setNowPlaying } = handlePlayer(statePlayList[0]);
+
   return (
     <div className="App">
       <Background backgroundURL={nowPlaying.thumbnail} />
       <MainFrame>
         <BodyFrame>
           <DetailPlayFrame>
-            <Player nowPlaying={nowPlaying} />
+            <Player
+              nowPlaying={nowPlaying}
+              statePlayList={statePlayList}
+              setNowPlaying={setNowPlaying}
+            />
           </DetailPlayFrame>
           <ControllerPlayFrame>
             <ControllerTitle>

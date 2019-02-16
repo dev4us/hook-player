@@ -2,6 +2,7 @@ import React from "react";
 import DetailPlaying from "./DetailPlaying";
 import YouTube from "react-yt";
 import styled from "styled-components";
+import { toast } from "react-toastify";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -51,6 +52,7 @@ const DurationBar = styled.input`
   border-radius: 5px;
   background: rgba(255, 255, 255, 0.5);
   outline: none;
+  cursor: pointer;
 
   &::-webkit-slider-thumb {
     -webkit-appearance: none;
@@ -87,7 +89,7 @@ const ArrowBtn = styled(FontAwesomeIcon)`
   color: white;
 `;
 
-const Player = ({ nowPlaying }) => {
+const Player = ({ nowPlaying, statePlayList, setNowPlaying }) => {
   return (
     <>
       <LeftFrame>
@@ -128,10 +130,28 @@ const Player = ({ nowPlaying }) => {
                 seekTo(Math.ceil((value / 100) * duration));
               }
             };
-            // play NextMusic
-            if (getCurrentTime() === getDuration()) {
-              console.log("turn on the next music!!");
-            }
+            const prevPlay = () => {
+              // turn nextMusic
+              const nowIndex = statePlayList.findIndex(
+                val => val.videoKey === nowPlaying.videoKey
+              );
+              if (0 === nowIndex) {
+                toast.error("이전 항목이 없습니다.");
+              } else {
+                setNowPlaying(statePlayList[nowIndex - 1]);
+              }
+            };
+            const nextPlay = () => {
+              // turn nextMusic
+              const nowIndex = statePlayList.findIndex(
+                val => val.videoKey === nowPlaying.videoKey
+              );
+              if (statePlayList.length - 1 === nowIndex) {
+                toast.error("다음 항목이 없습니다.");
+              } else {
+                setNowPlaying(statePlayList[nowIndex + 1]);
+              }
+            };
 
             return (
               <Container>
@@ -150,7 +170,12 @@ const Player = ({ nowPlaying }) => {
                   </DurationStatus>
 
                   <RemotePlayer>
-                    <ArrowBtn icon={faChevronCircleLeft} />
+                    <ArrowBtn
+                      icon={faChevronCircleLeft}
+                      onClick={() => {
+                        prevPlay();
+                      }}
+                    />
                     {isPlaying ? (
                       <PlayPauseBtn
                         icon={faPauseCircle}
@@ -162,7 +187,12 @@ const Player = ({ nowPlaying }) => {
                         onClick={event => playVideo()}
                       />
                     )}
-                    <ArrowBtn icon={faChevronCircleRight} />
+                    <ArrowBtn
+                      icon={faChevronCircleRight}
+                      onClick={() => {
+                        nextPlay();
+                      }}
+                    />
                   </RemotePlayer>
                 </Controller>
               </Container>
