@@ -4,8 +4,8 @@ self.__precacheManifest = [
     "url": "/hook-player/static/js/runtime~main.727ba001.js"
   },
   {
-    "revision": "b4679616bc4fb00ad351",
-    "url": "/hook-player/static/js/main.b4679616.chunk.js"
+    "revision": "42dd5230e6b719720702",
+    "url": "/hook-player/static/js/main.42dd5230.chunk.js"
   },
   {
     "revision": "c115915f8916bc43dd4a",
@@ -16,7 +16,7 @@ self.__precacheManifest = [
     "url": "/hook-player/static/css/2.deebf0e2.chunk.css"
   },
   {
-    "revision": "c9eed899b14d5338c8684e524f3523c3",
+    "revision": "0aa675261aaad69b4e1c018489a8d005",
     "url": "/hook-player/index.html"
   }
 ];
