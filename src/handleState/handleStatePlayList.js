@@ -11,6 +11,24 @@ const handleStatePlayList = () => {
       thumbnail: "https://i.ytimg.com/vi/uzgp65UnPxA/maxresdefault.jpg",
       max_thumbnail: "https://i.ytimg.com/vi/uzgp65UnPxA/maxresdefault.jpg",
       duration: "04:30"
+    },
+    {
+      id: 1,
+      songName: "Charlie Puth - Attention [Official Video]",
+      singer: "Charlie Puth",
+      videoKey: "nfs8NYg7yQM",
+      thumbnail: "https://i.ytimg.com/vi/nfs8NYg7yQM/hqdefault.jpg",
+      max_thumbnail: "https://i.ytimg.com/vi/nfs8NYg7yQM/hqdefault.jpg",
+      duration: "03:52"
+    },
+    {
+      id: 2,
+      songName: "Pharrell Williams - Happy (Official Music Video)",
+      singer: "PharrellWilliamsVEVO",
+      videoKey: "ZbZSe6N_BXs",
+      thumbnail: "https://i.ytimg.com/vi/ZbZSe6N_BXs/maxresdefault.jpg",
+      max_thumbnail: "https://i.ytimg.com/vi/ZbZSe6N_BXs/maxresdefault.jpg",
+      duration: "04:01"
     }
   ];
 
@@ -22,7 +40,6 @@ const handleStatePlayList = () => {
 
   useEffect(() => {
     localStorage.setItem("localPlayList", JSON.stringify(statePlayList));
-    console.log(statePlayList);
   });
 
   return {
