@@ -1,5 +1,7 @@
 import React from "react";
 import styled from "styled-components";
+import { Helmet } from "react-helmet";
+import Favicon from "react-favicon";
 
 // For handle State
 import handleStatePlayList from "./handleState/handleStatePlayList";
@@ -69,6 +71,10 @@ function App() {
 
   return (
     <div className="App">
+      <Favicon url="//raw.githubusercontent.com/dev4us/source_warehouse/master/images/favicon.ico" />
+      <Helmet>
+        <title>HookPlayer - dev4us</title>
+      </Helmet>
       <Background backgroundURL={nowPlaying.thumbnail} />
       <GHCorner
         href="https://github.com/dev4us/hook-player"
