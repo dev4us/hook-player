@@ -54,7 +54,7 @@ const AlbumThumbnail = styled.div`
     `};
   @media (max-width: 500px) {
     width: 55px;
-    height: 58px;
+    height: 55px;
     margin-right: 10px;
   }
 `;
