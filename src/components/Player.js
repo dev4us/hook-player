@@ -34,8 +34,7 @@ const Controller = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 500px;
-
+  width: 80%;
   padding-top: 5%;
 `;
 const DurationStatus = styled.div`

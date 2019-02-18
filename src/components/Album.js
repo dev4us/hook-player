@@ -52,6 +52,11 @@ const AlbumThumbnail = styled.div`
     css`
       animation: ${rotate} 5s linear infinite;
     `};
+  @media (max-width: 500px) {
+    width: 55px;
+    height: 58px;
+    margin-right: 10px;
+  }
 `;
 const SubContainer = styled.div`
   display: block;

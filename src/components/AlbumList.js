@@ -6,6 +6,7 @@ const AlbumContainer = styled.div`
   flex: 1;
   height: 100%;
   overflow-y: scroll;
+  margin-top: 10%;
 `;
 
 const AlbumList = ({

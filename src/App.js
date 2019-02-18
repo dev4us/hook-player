@@ -34,6 +34,9 @@ const BodyFrame = styled.div`
   flex-wrap: wrap;
   height: 80%;
   width: 70%;
+  @media (max-width: 500px) {
+    width: 90%;
+  }
 `;
 
 const DetailPlayFrame = styled.div`
@@ -53,6 +56,10 @@ const ControllerPlayFrame = styled.div`
   -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12),
     0 3px 6px rgba(0, 0, 0, 0.1725);
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12), 0 3px 6px rgba(0, 0, 0, 0.1725);
+  @media (max-width: 986px) {
+    margin-top: 20%;
+    margin-bottom: 30px;
+  }
 `;
 const ControllerTitle = styled.div`
   font-size: 1.2rem;
@@ -117,7 +124,6 @@ function App() {
               statePlayList={statePlayList}
               addStatePlayList={addStatePlayList}
             />
-            <br />
             <AlbumList
               statePlayList={statePlayList}
               nowPlaying={nowPlaying}
