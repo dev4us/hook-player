@@ -1,3 +1,5 @@
+![gif](https://user-images.githubusercontent.com/19645646/52931678-8f0fdf00-3390-11e9-826e-fa540ae2e67f.gif)
+
 해당 프로젝트는 React Hook을 공부하기 위해 진행된 사이드 프로젝트입니다.
 
 ## HookPlayer
